@@ -71,9 +71,9 @@ One day my prince will come...
 
 ### Architectural overview
 
-The central concept used in OAF is that of Data Access Objects ([DAO]([https://en.wikipedia.org/wiki/Data_access_object](https://www.google.com/url?q=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FData_access_object&sa=D&sntz=1&usg=AFQjCNGF-JuHSomsJVDJiYpNGpmKTDTuDQ))):
+The central concept used in OAF is that of Data Access Objects ([DAO](https://en.wikipedia.org/wiki/Data_access_object)).
 
-In short, a DAO is an object that abstracts over the ‘accessing data’ part and presents a simple object oriented way to work with the objects. The objects in question are defined by the Open Asset API’s exposed resources [listed here]([http://help.openasset.com/06_Integration/REST_API#Resources](http://www.google.com/url?q=http%3A%2F%2Fhelp.openasset.com%2F06_Integration%2FREST_API%23Resources&sa=D&sntz=1&usg=AFQjCNG-hg0FFYjvbE-D1aiESafRCcvCCQ)).
+In short, a DAO is an object that abstracts over the ‘accessing data’ part and presents a simple object oriented way to work with the objects. The objects in question are defined by the Open Asset API’s exposed resources [listed here](http://help.openasset.com/06_Integration/REST_API#Resources).
 
 When accessing an image for a project we need to send a get request to:
 
@@ -85,7 +85,6 @@ When encapsulated using DAO objects accessing a particular project’s image url
 
 ```
         p = get_project()
-
         p.images[0][‘web_view’].url
 ```
 
@@ -93,40 +92,36 @@ In order to make this happen the models need a way to access the data remotely. 
 
 ```
         class Model
-                …
-                def get query
-                        @data_source.get query =&gt; @oa_id
-                   end
-                ...
+            ...
+            def get query
+                @data_source.get query => @oa_id
+            end
+            ...
         end
 
         class Project < Model
-                …
-                def images
-                        get :image
-                end
-                ...
+            ...
+            def images
+                    get :image
+            end
+            ...
         end
 ```
 
-Note that the data source is passed in to the model’s constructor.        
+Note that the data source is passed in to the model’s constructor. Below is a list of the classes/files.
 
 - core
-  - datasource
-  - model
+  + datasource
+  + model
 - models
-  - Project
-  - Image
-- Size
-  - data sources
-- Open Asset - uses rest_client gem to fetch from OA’s API
-  - Redis - uses redis gem to cache results
-  - Double - combines two above data sources into one which will automatically fetch from redis if it exists, otherwise fetch from OA then cache the result in redis
-
+  + Project
+  + Image
+  + Size
+- data sources
+  + Open Asset - uses rest_client gem to fetch from OA’s API
+  + Redis - uses redis gem to cache results
+  + Double - combines two above data sources into one which will automatically fetch from redis if it exists, otherwise fetch from OA then cache the result in redis
 - controller
-
-- get redirect `/:project_number/:tag/:index/:size`
-- get json `/:project_number.json`
 
 #### Clever (in a bad way) Code Shortcut
 
