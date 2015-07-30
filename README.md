@@ -112,21 +112,16 @@ In order to make this happen the models need a way to access the data remotely. 
 Note that the data source is passed in to the model’s constructor.        
 
 - core
-
-- datasource
-- model
-
+  - datasource
+  - model
 - models
-
-- Project
-- Image
+  - Project
+  - Image
 - Size
-
-- data sources
-
+  - data sources
 - Open Asset - uses rest_client gem to fetch from OA’s API
-- Redis - uses redis gem to cache results
-- Double - combines two above data sources into one which will automatically fetch from redis if it exists, otherwise fetch from OA then cache the result in redis
+  - Redis - uses redis gem to cache results
+  - Double - combines two above data sources into one which will automatically fetch from redis if it exists, otherwise fetch from OA then cache the result in redis
 
 - controller
 
@@ -142,11 +137,11 @@ This is done to simplify things. However a more robust and less ‘clever’ way
 ```
 class_map = {
 
-project: Project,
+  project: Project,
 
-image: Image,
+  image: Image,
 
-other_class: Namespace::OtherClass
+  other_class: Namespace::OtherClass
 
 }
 ```
