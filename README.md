@@ -146,7 +146,7 @@ class_map = {
 }
 ```
 
-## Coming soon Extra things to do
+## ~~Coming soon~~ Extra things to do
 
 ##### JSON API
 
